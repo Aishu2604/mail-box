@@ -1,12 +1,19 @@
 import React, { useState, useRef } from "react";
 import classes from "./SignUp.module.css";
 import useHttp from "../Hook/useHttp";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { authAction } from "../../store/auth-reducer";
+
 const SignUp = () => {
   const [isLogin, setLogin] = useState(true);
   const [error, sendRequest] = useHttp();
+  const history = useHistory();
+  const dispatch = useDispatch();
   const enteredEmailRef = useRef();
   const enteredPasswordRef = useRef();
   const enteredConfPassRef = useRef();
+
   const formSubmitHandler = async (event) => {
     event.preventDefault();
     const enteredMail = enteredEmailRef.current.value;
@@ -26,8 +33,10 @@ const SignUp = () => {
       } else {
         const resData = (res) => {
           console.log(res);
+          dispatch(authAction.setToken(res.data.idToken));
           enteredEmailRef.current.value = "";
           enteredPasswordRef.current.value = "";
+          history.replace("/front");
         };
 
         sendRequest(
