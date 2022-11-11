@@ -11,7 +11,7 @@ const SignUp = () => {
     event.preventDefault();
     const enteredMail = enteredEmailRef.current.value;
     const enteredPass = enteredPasswordRef.current.value;
-    const enteredConfPass = !isLogin? enteredConfPassRef.current.value:null;
+    const enteredConfPass = !isLogin ? enteredConfPassRef.current.value : null;
 
     console.log("Logged In");
 
