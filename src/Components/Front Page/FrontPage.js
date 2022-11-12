@@ -6,11 +6,14 @@ import { useSelector } from "react-redux";
 import classes from "./FrontPage.module.css";
 import Welcome from "./Welcome";
 import { useParams } from "react-router-dom";
+import SentBox from "../Message Sent Box/SentBox";
 
 const FrontPage = () => {
   const history = useHistory();
 
   const receiveMail = useSelector((state) => state.mailmanager.receive);
+  const sentMail = useSelector((state) => state.mailmanager.sent);
+  console.log(sentMail)
   console.log(receiveMail);
   const { id } = useParams();
   console.log(id, "==>ID");
@@ -37,15 +40,21 @@ const FrontPage = () => {
           </button>
           <button
             onClick={() => {
-              history.push("/front/inbox");
+              history.push("/front/receiveinbox");
             }}
           >{`Inbox ${unSeen}`}</button>
-          <button>Sent</button>
+          <button
+            onClick={() => {
+              history.push("/front/inbox");
+            }}
+          >
+            Sent
+          </button>
         </section>
-        <Route path="/front/inbox">
+        <Route path="/front/receiveinbox">
           <section className={classes.inbox_main}>
             {receiveMail.map((mail) => {
-              return <Inbox key={mail.id} mails={mail} />;
+              return <Inbox key={mail.id} mails={mail} type={"receive"} />;
             })}
           </section>
         </Route>
@@ -54,6 +63,13 @@ const FrontPage = () => {
         </Route>
         <Route path="/front/welcome">
           <Welcome />
+        </Route>
+        <Route path="/front/inbox">
+          <section className={classes.inbox_main}>
+            {sentMail.map((mail) => {
+              return <Inbox key={mail.id} mails={mail} type={"sent"} />;
+            })}
+          </section>
         </Route>
       </main>
     </div>

@@ -20,3 +20,23 @@ export const ActionCreater = (userEmail) => {
     fetchData();
   };
 };
+
+export const ActionForSentMail = (userEmail) => {
+  console.log(userEmail, " =>Sent Email");
+  const mail1 = userEmail.replace("@", "");
+  const mail2 = mail1.replace(".", "");
+  return async (dispatch) => {
+    const fetchData = async () => {
+      try {
+        let res = await axios.get(
+          `https://email-box-8964b-default-rtdb.firebaseio.com/sent${mail2}.json`
+        );
+        dispatch(manageEmailActions.setSentServerMail(res.data));
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchData();
+  };
+};

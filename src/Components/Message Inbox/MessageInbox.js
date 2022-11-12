@@ -10,13 +10,13 @@ const MessageInbox = () => {
   const userMail = useSelector((state) => state.auth.MailBoxId)
   const mail3 = userMail.replace("@", "");
   const mail4 = mail3.replace(".", "");
-  // const { id } = useParams();
+  const { id } = useParams();
   const [error, sendRequest] = useHttp()
   const dispatch = useDispatch()
   const history = useHistory()
 
   console.log(mails, "==>MESSAGE");
-  let arr = mails.find((index) => index.id);
+  let arr = mails.find((index) => index.id === id);
 
   console.log(arr);
   const deleteMailHandler=()=>
@@ -25,7 +25,7 @@ const MessageInbox = () => {
     {
       dispatch(manageEmailActions.deleteMail(arr.id))
       alert('Message Deleted Successfully')
-      history.replace('/front/inbox')
+      history.replace('/front/receiveinbox')
     }
 
     sendRequest(

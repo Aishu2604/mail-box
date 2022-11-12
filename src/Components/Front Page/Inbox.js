@@ -10,6 +10,7 @@ const Inbox = (prop) => {
   console.log(userMail);
   const mail3 = userMail.replace("@", "");
   const mail4 = mail3.replace(".", "");
+  console.log(mail4);
   const dispatch = useDispatch();
   console.log(prop, "==>inside inbox");
   const removeSeenHandler = () => {
@@ -17,13 +18,17 @@ const Inbox = (prop) => {
       seen: true,
     };
     const responseHandler = (res) => {
-      dispatch(manageEmailActions.seenMessage(prop.mails.id));
+      if (prop.type === "receive") {
+        dispatch(manageEmailActions.seenMessage(prop.mails.id));
+      } else {
+        dispatch(manageEmailActions.seenSentMessageHandler(prop.mails.id));
+      }
       console.log(res);
     };
     sendRequest(
       {
         request: "patch",
-        url: `https://email-box-8964b-default-rtdb.firebaseio.com/receive${mail4}/${prop.mails.id}.json`,
+        url: `https://email-box-8964b-default-rtdb.firebaseio.com/${prop.type}${mail4}/${prop.mails.id}.json`,
         data: dataObj,
         header: { "Content-type": "application/json" },
       },
@@ -41,7 +46,7 @@ const Inbox = (prop) => {
               style={{
                 backgroundColor: prop.mails.seen === false ? "grey" : "white",
               }}
-              to={"/message"}
+              to={`/${prop.type}message/${prop.mails.id}`}
             >
               {prop.mails.message}
             </Link>
