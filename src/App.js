@@ -13,12 +13,12 @@ function App() {
         <Route path="/" exact>
           <SignUp />
         </Route>
-        <Route path="/front" exact>
+        <Route path="/front">
           <FrontPage />
         </Route>
-        <Route path="/mailBody" exact>
+        {/* <Route path="/mailBody" exact>
           <MailBody />
-        </Route>
+        </Route> */}
       </Switch>
     </div>
   );

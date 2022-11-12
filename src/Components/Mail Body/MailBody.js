@@ -97,7 +97,7 @@ const MailBody = () => {
               border: "1px solid antiquewhite",
               paddingBottom: "145px",
             }}
-            // onChange={refHandler}
+            onChange={refHandler}
           />
         </form>
         <button className={classes.send_button} onClick={sendMailHandler}>

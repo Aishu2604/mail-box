@@ -10,6 +10,20 @@ const manageEmailSlice = createSlice({
       state.sent = state.sent.push(action.payload);
       console.log(action.payload, "==>inside redux");
     },
+    setReceiveMail(state, action) {
+      state.receive = state.receive.push("hloooo");
+      let arr = [];
+      let obj = action.payload;
+      for (let id in obj) {
+        arr.push({
+          id: id,
+          message: obj[id].message,
+          subject: obj[id].subject,
+        });
+      }
+      console.log(arr, "==>INSIDE  MANAGER");
+      state.receive = arr;
+    },
   },
 });
 
