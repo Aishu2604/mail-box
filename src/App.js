@@ -11,9 +11,10 @@ import { ActionCreater } from "./store/store-action";
 function App() {
   const dispatch = useDispatch();
   const userEmail = useSelector((state) => state.auth.MailBoxId);
-  useEffect(() => {
-    dispatch(ActionCreater(userEmail));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(ActionCreater(userEmail));
+  // }, []);
+  dispatch(ActionCreater(userEmail));
   return (
     <div className="App">
       <header>Let's Start Friend's</header>

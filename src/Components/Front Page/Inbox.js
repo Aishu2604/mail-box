@@ -41,7 +41,7 @@ const Inbox = (prop) => {
               style={{
                 backgroundColor: prop.mails.seen === false ? "grey" : "white",
               }}
-              to={`/message/${prop.mails.id}`}
+              to={"/message"}
             >
               {prop.mails.message}
             </Link>
