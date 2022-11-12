@@ -1,16 +1,15 @@
+import React, { useState, useCallback } from "react";
 import axios from "axios";
-import { useCallback, useState } from "react";
-
 const useHttp = () => {
   const [error, setError] = useState(null);
 
-  const sendRequest = useCallback(async (requestConfigured, resData) => {
+  const sendRequest = useCallback(async (requestConfig, resData) => {
     setError(null);
     try {
-      const res = await axios[requestConfigured.request](
-        requestConfigured.url,
-        requestConfigured.data ? requestConfigured.data : null,
-        { headers: requestConfigured.header }
+      const res = await axios[requestConfig.request](
+        requestConfig.url,
+        requestConfig.data ? requestConfig.data : null,
+        { headers: requestConfig.header }
       );
       console.log(res);
       resData(res);
@@ -22,5 +21,4 @@ const useHttp = () => {
 
   return [error, sendRequest];
 };
-
 export default useHttp;

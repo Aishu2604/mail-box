@@ -34,6 +34,9 @@ const SignUp = () => {
         const resData = (res) => {
           console.log(res);
           dispatch(authAction.setToken(res.data.idToken));
+          let mail1 = enteredMail.replace("@", "");
+          let mail2 = mail1.replace(".", "");
+          dispatch(authAction.setEmailId(mail2));
           enteredEmailRef.current.value = "";
           enteredPasswordRef.current.value = "";
           history.replace("/front");
@@ -94,7 +97,7 @@ const SignUp = () => {
         <h3>{isLogin ? "Login" : "Sign Up"}</h3>
         <input
           ref={enteredEmailRef}
-          type="email"
+          type="text"
           autoComplete="on"
           placeholder="Email"
         />
